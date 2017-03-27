@@ -22,7 +22,7 @@ int main() {
     const int npart = 3;
     double Speed[npart]={5, 6.3, 2};
     double Position[npart]={0, 1, 5};
-    const char Symbol[npart]={'x', 'O' ,'v'};
+    char Symbol[npart]={'x', 'O' ,'v'};
     int timeStep = 0;
     const int stopTime = 60;
  
@@ -30,7 +30,7 @@ int main() {
     while (timeStep < stopTime) { 
         clearScreen();// put blank spaces before each entry
         for (int i=0; i<npart; i++) {
-        draw(Position[i], Symbol[1]);//add arguments
+        draw(Position[i], Symbol[i]);//add arguments
         move(Position[i], Speed[i]);
         }
         printScreen();
