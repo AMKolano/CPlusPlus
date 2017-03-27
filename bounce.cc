@@ -3,8 +3,13 @@
 const int maxColumn = 80;
 const int minColumn = 0;
 
+char screen[80];
+
 void draw(const double, const char);//add parameters, types
 void move(double&, double&);
+void printScreen();
+void clearScreen();
+
 
 int main() {
     const char particleSymbol = 'x';
@@ -15,21 +20,31 @@ int main() {
  
 
     while (timeStep < stopTime) {
+        //clear buffer
+        //std::flush
+        clearScreen();        
         draw(particlePosition, particleSymbol);//add arguments
         move(particlePosition, particleSpeed);
+        printScreen();
         timeStep++;
   }
 }
 
 void draw(double const particlePosition, char const particleSymbol){ //in draw we dont change pos
-    for (int i = minColumn; i < particlePosition; i++) {
-         std::cout << " ";
-    }
-    std::cout << particleSymbol << std::endl;
-   
+     screen[static_cast<int>(particlePosition)] = particleSymbol; //position is double so we need to cast it to int
 }
 
+void printScreen(){
+    for (int i =0; i < maxColumn; i++)
+        std::cout << screen[i]; //dont clear the buffer here yet
+    std::cout << std::endl; //clear buffer
+}
 
+void clearScreen(){
+    for (int i =0; i < maxColumn; i++)
+        screen[i]= ' '; //dont clear the buffer here yet
+   
+}
 
 void move(double& particlePosition, double& particleSpeed){
  particlePosition += particleSpeed;
