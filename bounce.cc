@@ -3,15 +3,15 @@
 const int maxColumn = 80;
 const int minColumn = 0;
 
-void draw(double, char);//add parameters, types
+void draw(const double, const char);//add parameters, types
 void move(double&, double&);
 
 int main() {
-    char particleSymbol = 'x';
+    const char particleSymbol = 'x';
     double particlePosition = 0;
     double particleSpeed = 6.3;
     int timeStep = 0;
-    int stopTime = 60;
+    const int stopTime = 60;
  
 
     while (timeStep < stopTime) {
@@ -21,7 +21,7 @@ int main() {
   }
 }
 
-void draw(double particlePosition, char particleSymbol){
+void draw(double const particlePosition, char const particleSymbol){ //in draw we dont change pos
     for (int i = minColumn; i < particlePosition; i++) {
          std::cout << " ";
     }
