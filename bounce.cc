@@ -9,6 +9,17 @@ int minColumn = 0;
 int timeStep = 0;
 int stopTime = 60;
 
+void draw();
+void move();
+
+int main() {
+
+  while (timeStep < stopTime) {
+        draw();
+        move();
+        timeStep++;
+  }
+}
 
 void draw(){
     for (int i = minColumn; i < particlePosition; i++) {
@@ -35,12 +46,12 @@ void move(){
 
 }
 
-int main() {
 
-  while (timeStep < stopTime) {
-        draw();
-        move();    
-        timeStep++;
-  }
-}
+
+
+
+
+
+
+
 
