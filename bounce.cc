@@ -2,8 +2,8 @@
 
 const int maxColumn = 80;
 const int minColumn = 0;
-
-char screen[80];
+const int screenSize =  maxColumn - minColumn;  //c++ runs const int array size
+char screen[screenSize];
 
 void draw(const double, const char);//add parameters, types
 void move(double&, double&);
@@ -19,10 +19,8 @@ int main() {
     const int stopTime = 60;
  
 
-    while (timeStep < stopTime) {
-        //clear buffer
-        //std::flush
-        clearScreen();        
+    while (timeStep < stopTime) { 
+        clearScreen();// put blank spaces before each entry
         draw(particlePosition, particleSymbol);//add arguments
         move(particlePosition, particleSpeed);
         printScreen();
@@ -35,13 +33,13 @@ void draw(double const particlePosition, char const particleSymbol){ //in draw w
 }
 
 void printScreen(){
-    for (int i =0; i < maxColumn; i++)
+    for (int i =0; i < screenSize; i++)
         std::cout << screen[i]; //dont clear the buffer here yet
     std::cout << std::endl; //clear buffer
 }
 
 void clearScreen(){
-    for (int i =0; i < maxColumn; i++)
+    for (int i = minColumn; i < screenSize; i++)
         screen[i]= ' '; //dont clear the buffer here yet
    
 }
