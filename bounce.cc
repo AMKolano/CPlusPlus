@@ -12,23 +12,27 @@ void clearScreen();
 
 
 int main() {
-    const char particleSymbol = 'x';
+   /* const char particleSymbol = 'x';
     double particlePosition = 0;
     double particleSpeed = 6.3;
     const char particleSymbol2 = 'O';
     double particlePosition2 = 0;
     double particleSpeed2 = 5.8;
-
+   */
+    const int npart = 3;
+    double Speed[npart]={5, 6.3, 2};
+    double Position[npart]={0, 1, 5};
+    const char Symbol[npart]={'x', 'O' ,'v'};
     int timeStep = 0;
     const int stopTime = 60;
  
 
     while (timeStep < stopTime) { 
         clearScreen();// put blank spaces before each entry
-        draw(particlePosition, particleSymbol);//add arguments
-        draw(particlePosition2, particleSymbol2);
-        move(particlePosition, particleSpeed);
-        move(particlePosition2, particleSpeed2); 
+        for (int i=0; i<npart; i++) {
+        draw(Position[i], Symbol[1]);//add arguments
+        move(Position[i], Speed[i]);
+        }
         printScreen();
         timeStep++;
   }
