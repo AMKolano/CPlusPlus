@@ -1,0 +1,157 @@
+https://jacek.web.cern.ch/jacek/courses/c++1/course.html
+
+clang++ - great for error messages, if u dont understand something, run it over your code..even if u compile with other stuff
+
+#libraries of users pc architecture, preprocessor directive
+preprocessing 
+
+g++ -ansi -pedantic -Wall -E  hello.cc | wc -l
+ stuff from libraries #
+
+#define
+comment out a hole section easy 
+#if 0
+#end if
+
+other:
+#ifndef
+#ifdef
+#else
+
+.......................
+int/float etc- help to interpret 011 ...to distinguish, 
+
+types-for user errors- is the structure making sense
+
+int main ; -decleration, doesnt say what it does
+int main() { -says what it does
+.......................
+int return type...
+0 output - success code 0, means good in op, anzthing else is failure
+EXIT_SUCCESS- macro defined 0, some may have other , so better use this macro
+or 
+EXIT_FAILURE
+
+.......................
+
+::  std::cout - go and look for that name cout in this namespace std
+
+arythmetic left shift , 8<<1 is 16 -- binary stuff, e.g 1<<2 is 4,  001 -> 100 (4)
+
+hing- print right now, if i didnt do it and make mistake, i wouldnt see it coz the buffer was not sent
+
+
+...........................
+        BOUNCE
+..........................
+#27 March 2017
+...................
+GIT:
+
+git remote rm jacek
+
+a++b -> a= a+b
+
+git diff
+git add file
+git commit -m ""
+git log shows both
+
+....................
+
+ g++ -ansi -pedantic -Wall -o  bounce bounce.cc --> give a name to executable
+ we dotn want executbles to go to git, so we can create a file of stuff that git should ignore .git ignore
+ vi .gitignore
+u can also hide it or commit, then u can track and add stuff as u go
+
+automated checks to check if code is not broken- in real life
+
+
+global- and const is ok, but if its variable, mutuable shared state we should avoid, difficult to follow and debug and anzone can change it
+
+parameters names
+arguments are values
+
+void draw(); usually in header files, it just says its ok this funtion is somehwere, 
+and it appears further down etc
+
+
+
+
+
+nsi -pedantic -Wall -o  bounce bounce.cc 
+ 1107  g++ -ansi -pedantic -Wall -c bounce.cc 
+ 1108  ls
+ 1109  nm bounce.o
+-E precompile, 
+-c stop before linkin ?
+
+linker and compiper errors
+
+GIT interface- Magit, uses Emacs as graphics framework
+
+branch from some version:
+git checkout -b pointers-1 93a990
+
+    pointers-1 its the new name
+    93a990 is the begining of commit ref number
+-
+.......................
+pointers-addresses in memorz (from c code)
+
+int i; reserve memorz for var i
+
+i goes out of scope, memorz is free, not with x
+
+int &x = i; // Make x a new variable equivalent to the existing variable i, dont allocate memory to variable x
+p = &x;     // Store the address of x in the variable p, give me pointer to x, where is it sored
+p decleared elsewhere
+when i goes out of scope, memorz is free, not with x
+
+
+int a;
+int* pi; // pi is a variable of type "pointer to integer", reserve memorz for a pointer
+a = *pi; // copy the integer at address pi into the variable a, take me to the pointer(address) and take me there call it a, 
+
+*pi = a; // copy the integer in variable a into the memory location pi,
+
+
+   &   |   val  | * (whats the ref of )       
+a| 1   |   10   |-  error not a pointer, type is no the same, so compiler diesnt wanna do it, if u force it it will search for whats under address 10 (bs)
+b| 2   |    1   |10 (reference to value stored at address 1)
+c| 1   |   10   |-  (c is the same as a)
+d| 2   |    1   |10 (d is ref of b)
+
+
+memory allocation
+0|
+1| a c  (10)
+2| b d   (1 address of a)
+3| 
+4|
+5|
+6|
+7|
+
+
+& reference
+* pointers-dereference
+double* is a type
+..........................
+come back to master: git checkout master
+....................................
+
+using std::cout;
+NEVER use using namespace std:
+
+"" string
+'' for single characters
+
+
+
+
+
+
+
+
+
