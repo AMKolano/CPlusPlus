@@ -15,6 +15,10 @@ int main() {
     const char particleSymbol = 'x';
     double particlePosition = 0;
     double particleSpeed = 6.3;
+    const char particleSymbol2 = 'O';
+    double particlePosition2 = 0;
+    double particleSpeed2 = 5.8;
+
     int timeStep = 0;
     const int stopTime = 60;
  
@@ -22,7 +26,9 @@ int main() {
     while (timeStep < stopTime) { 
         clearScreen();// put blank spaces before each entry
         draw(particlePosition, particleSymbol);//add arguments
+        draw(particlePosition2, particleSymbol2);
         move(particlePosition, particleSpeed);
+        move(particlePosition2, particleSpeed2); 
         printScreen();
         timeStep++;
   }
@@ -56,7 +62,6 @@ void move(double& particlePosition, double& particleSpeed){
       particlePosition = minColumn;
       particleSpeed = -particleSpeed;
     }
-
 
 }
 
