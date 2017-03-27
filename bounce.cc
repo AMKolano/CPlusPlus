@@ -4,7 +4,7 @@ const int maxColumn = 80;
 const int minColumn = 0;
 
 void draw(double, char);//add parameters, types
-void move(double, double);
+void move(double&, double&);
 
 int main() {
     char particleSymbol = 'x';
@@ -31,10 +31,11 @@ void draw(double particlePosition, char particleSymbol){
 
 
 
-void move(double particlePosition, double particleSpeed){
+void move(double& particlePosition, double& particleSpeed){
  particlePosition += particleSpeed;
 
-
+//we want to change the position, so we want to retrieve it by reference "&"n from the original and not copy, characters yes if large
+//speed changes when we go back
    if (particlePosition >= maxColumn) {
       particlePosition = maxColumn;
       particleSpeed = -particleSpeed;
