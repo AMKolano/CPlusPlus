@@ -5,7 +5,7 @@ const int minColumn = 0;
 const int screenSize =  maxColumn - minColumn;  //c++ runs const int array size
 char screen[screenSize];
 
-void draw(const double, const char);//add parameters, types
+void draw(const int, const char);//add parameters, types
 void move(double&, double&);
 void printScreen();
 void clearScreen();
@@ -28,7 +28,7 @@ int main() {
   }
 }
 
-void draw(double const particlePosition, char const particleSymbol){ //in draw we dont change pos
+void draw(int const particlePosition, char const particleSymbol){ //in draw we dont change pos
      screen[static_cast<int>(particlePosition)] = particleSymbol; //position is double so we need to cast it to int
 }
 
