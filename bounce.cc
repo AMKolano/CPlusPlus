@@ -1,27 +1,27 @@
 #include <iostream>
 
+const int maxColumn = 80;
+const int minColumn = 0;
 
-char particleSymbol = 'x';
-double particlePosition = 0;
-double particleSpeed = 6.3;
-int maxColumn = 80;
-int minColumn = 0;
-int timeStep = 0;
-int stopTime = 60;
-
-void draw();
-void move();
+void draw(double, char);//add parameters, types
+void move(double, double);
 
 int main() {
+    char particleSymbol = 'x';
+    double particlePosition = 0;
+    double particleSpeed = 6.3;
+    int timeStep = 0;
+    int stopTime = 60;
+ 
 
-  while (timeStep < stopTime) {
-        draw();
-        move();
+    while (timeStep < stopTime) {
+        draw(particlePosition, particleSymbol);//add arguments
+        move(particlePosition, particleSpeed);
         timeStep++;
   }
 }
 
-void draw(){
+void draw(double particlePosition, char particleSymbol){
     for (int i = minColumn; i < particlePosition; i++) {
          std::cout << " ";
     }
@@ -31,7 +31,7 @@ void draw(){
 
 
 
-void move(){
+void move(double particlePosition, double particleSpeed){
  particlePosition += particleSpeed;
 
 
