@@ -148,6 +148,32 @@ NEVER use using namespace std:
 '' for single characters
 
 
+......................................
+              Bounce
+....................................
+28 march 2017
+
+git log --all --graph --oneline --decorate
+
+
+lgrind a program watching your program runnings (test), looks at memory, e.g. accessing memorz outside of bounds
+
+
+double* pd = 0; pointer to a double
+pd + 1; // Not 1, but 8 -> take one job of double which is 8 (size of double?)
+we have array
+3[a]
+so compiler goes to 3rd place of that array
+
+.........................
+dynamic allocation of memorz (arrays) require deleting?freeing it at the end of the process, otherwise u may lose it all)
+
+int* one  = new int;     // Allocate memory for a single integer
+int* many = new int[10]; // Allocate memory for 10 intgerers
+
+delete one;
+delete [] many; // VERY IMPORTANT, missing brackets can be really bad
+...............................
 
 
 
