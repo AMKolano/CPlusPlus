@@ -12,22 +12,22 @@ struct Particle {
     double Position;
 
     void draw(char screen[]){ // Particle * ps is done aoutomatically and changed to "this" by the compiler
-       screen[static_cast<int>(this->Position)] = this->Symbol;
+       screen[static_cast<int>(Position)] = Symbol;
     }
 
     void move(){
-        this->Position += this->Speed;
+        Position += Speed; //this-> no longer needed, compiler does it for u 
 
-        if (this->Position >= maxColumn) {
-        this->Position = maxColumn;
-        this->Speed = -this->Speed;
-        } else if (this->Position < minColumn) {
-        this->Position = minColumn;
-        this->Speed = -this->Speed;
+        if (Position >= maxColumn) {
+        Position = maxColumn;
+        Speed = -Speed;
+        } else if (Position < minColumn) {
+        Position = minColumn;
+        Speed = -Speed;
         }
     }
     void initialize(char Symbol, double Speed, double Position ){
-        this->Symbol = Symbol;
+        this->Symbol = Symbol;//the smae names so here this-> is needed, or i change the name
         this->Speed = Speed;
         this->Position = Position;
     }
