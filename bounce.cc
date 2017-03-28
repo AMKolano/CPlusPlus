@@ -2,13 +2,13 @@
 
 const int maxColumn = 80;
 const int minColumn = 0;
-const int screenSize =  maxColumn - minColumn + 1;  //c++ runs const int array size,we want particle to run between 0 and 80, compiler does not recognize the error if only 80 is left, we start to access memory outside boundries, (where we update screen size with value 80, giving  the array 81 spaces 
-char screen[screenSize];
 
-void draw(const int, const char);//add parameters, types
+
+
+void draw(const int, const char, char[]);//add parameters, types, we get correct result, an array is a pointer, so here we do not copy the array we point to it-> the name is pointing to the begining ot the array
 void move(double&, double&);
-void printScreen();
-void clearScreen();
+void printScreen(const int, char[]);
+void clearScreen(const int, char[]);
 
 
 int main() {
@@ -18,32 +18,36 @@ int main() {
     char Symbol[npart] = {'x', 'O' ,'v'};
     int timeStep = 0;
     const int stopTime = 60;
+    const int screenSize =  maxColumn - minColumn + 1; 
+    char screen[screenSize];
+
+
  
 
     while (timeStep < stopTime) { 
-        clearScreen();// put blank spaces before each entry
+        clearScreen(screenSize, screen);// put blank spaces before each entry
         for (int i=0; i < npart; i++) {
-        draw(Position[i], Symbol[i]);//add arguments
+        draw(Position[i], Symbol[i], screen);//add arguments
         move(Position[i], Speed[i]);
         }
-        printScreen();
+        printScreen(screenSize, screen);
         timeStep++;
   }
 }
 
-void draw(int const particlePosition, char const particleSymbol){ //in draw we dont change pos
+void draw(int const particlePosition, char const particleSymbol, char screen[]){ //in draw we dont change pos
      screen[static_cast<int>(particlePosition)] = particleSymbol; //position is double so we need to cast it to int
 }
 
-void printScreen(){
+void printScreen(const int screenSize, char* screen){  // pointer normally should be a solution, c arrays can be passed by value, which in fact is a pointer
     for (int i =0; i < screenSize; i++)
         std::cout << screen[i]; //dont clear the buffer here yet
     std::cout << std::endl; //clear buffer
 }
 
-void clearScreen(){
+void clearScreen(const int screenSize, char screen[]){ // this is equivalent to the above char* screen, no matter what i put inside the brackets it will be ignored, as it does not know its size
     for (int i = minColumn; i < screenSize; i++)
-        screen[i]= ' '; //dont clear the buffer here yet
+        screen[i] = ' '; //dont clear the buffer here yet
    
 }
 
