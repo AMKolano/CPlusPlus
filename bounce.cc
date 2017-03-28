@@ -11,7 +11,7 @@ struct Particle {
     double Speed;
     double Position;
 
-    void draw(char screen[]) const{ // Const. it is not allowed to modifiy it . Pointer is const automatically.
+    void draw(char screen[]) const{ // Const member function. it is not allowed to modifiy it . Pointer is const automatically.
        screen[static_cast<int>(Position)] = Symbol;
     }
 
@@ -33,8 +33,31 @@ struct Particle {
     }
 };
 
-void printScreen(const int, char[]);
-void clearScreen(const int, char[]);
+
+struct Screen{
+    int screenSize;
+    char* screen; 
+
+
+    void printScreen(){ //equivalent to below 
+        for (int i =0; i < screenSize; i++)
+            std::cout << screen[i]; //dont clear the buffer here yet
+            std::cout << std::endl; //clear buffer
+    }
+
+    void clearScreen(){
+        for (int i = minColumn; i < screenSize; i++)
+            screen[i] = ' '; //dont clear the buffer here yet 
+    }
+
+
+    void initializeScreen(int screenSize){
+        this-> screenSize = screenSize;
+        this->screen = new char [screenSize];
+    }
+
+};
+
 
 int main() {
     const int npart = 3;
@@ -46,33 +69,39 @@ int main() {
 
     int timeStep = 0;
     const int stopTime = 60;
-    const int screenSize =  maxColumn - minColumn + 1; 
-    char* screen = new char[screenSize]; // dynamically allocate the memory
+    
+   //Initialize screen
+     Screen screen;
+     screen.initializeScreen(maxColumn - minColumn + 1);    
+    
+  //  char* screen = new char[screenSize]; // dynamically allocate the memory
 
     while (timeStep < stopTime) { 
-        clearScreen(screenSize, screen);// put blank spaces before each entry
+        screen.clearScreen();// put blank spaces before each entry
         for (int i=0; i < npart; i++) {
         //equivalent to the one below &ps[i]->draw(screen):   
-        ps[i].draw(screen);//magic happens and no longer need arguments here?
+        ps[i].draw();//magic happens and no longer need arguments here?
         ps[i].move(); 
         }
-        printScreen(screenSize, screen);
+        screen.printScreen();
         timeStep++;
   }
-    delete [] screen; // delete memory used
+   // delete [] screen; // delete memory used
 }
 
 
-void printScreen(const int screenSize, char* screen){ //equivalent to below 
-    for (int i =0; i < screenSize; i++)
-        std::cout << screen[i]; //dont clear the buffer here yet
-    std::cout << std::endl; //clear buffer
-}
 
-void clearScreen(const int screenSize, char screen[]){ 
-    for (int i = minColumn; i < screenSize; i++)
-        screen[i] = ' '; //dont clear the buffer here yet 
-}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
