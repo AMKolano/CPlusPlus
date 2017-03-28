@@ -11,7 +11,7 @@ struct Particle {
     double Speed;
     double Position;
 
-    void draw(char screen[]){ // Particle * ps is done aoutomatically and changed to "this" by the compiler
+    void draw(char screen[]) const{ // Const. it is not allowed to modifiy it . Pointer is const automatically.
        screen[static_cast<int>(Position)] = Symbol;
     }
 
