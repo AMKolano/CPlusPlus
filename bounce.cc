@@ -10,8 +10,8 @@ struct Particle {
     double Position;
 };
 
-void draw(const Particle&, char[]);
-void move(Particle&);
+void draw(const Particle*, char[]);
+void move(Particle*);
 void printScreen(const int, char[]);
 void clearScreen(const int, char[]);
 
@@ -40,8 +40,8 @@ int main() {
     while (timeStep < stopTime) { 
         clearScreen(screenSize, screen);// put blank spaces before each entry
         for (int i=0; i < npart; i++) {
-        draw(ps[i], screen);//add arguments
-        move(ps[i]); 
+        draw(&ps[i], screen);//add arguments
+        move(&ps[i]); 
         }
         printScreen(screenSize, screen);
         timeStep++;
@@ -49,8 +49,8 @@ int main() {
     delete [] screen; // delete memory used
 }
 
-void draw(const Particle& ps, char screen[]){ //ref & here saves memory, but cant draw const particles now, const Particle does not allow to change it
-     screen[static_cast<int>(ps.Position)] = ps.Symbol; 
+void draw(const Particle* ps, char screen[]){ //ref & here saves memory, but cant draw const particles now, const Particle does not allow to change it
+     screen[static_cast<int>(ps->Position)] = ps->Symbol; 
 }
 
 void printScreen(const int screenSize, char* screen){ //equivalent to below 
@@ -65,15 +65,15 @@ void clearScreen(const int screenSize, char screen[]){
    
 }
 
-void move(Particle& ps){
- ps.Position += ps.Speed;
+void move(Particle* ps){
+ ps->Position += ps->Speed;
 
-   if (ps.Position >= maxColumn) {
-      ps.Position = maxColumn;
-      ps.Speed = -ps.Speed;
-    } else if (ps.Position < minColumn) {
-      ps.Position = minColumn;
-      ps.Speed = -ps.Speed;
+   if (ps->Position >= maxColumn) {
+      ps->Position = maxColumn;
+      ps->Speed = -ps->Speed;
+    } else if (ps->Position < minColumn) {
+     ps->Position = minColumn;
+      ps->Speed = -ps->Speed;
     }
 
 }
