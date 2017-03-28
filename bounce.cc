@@ -2,7 +2,7 @@
 
 const int maxColumn = 80;
 const int minColumn = 0;
-const int screenSize =  maxColumn - minColumn;  //c++ runs const int array size
+const int screenSize =  maxColumn - minColumni + 1;  //c++ runs const int array size,we want particle to run between 0 and 80, compiler does not recognize the error if only 80 is left, we start to access memory outside boundries, (where we update screen size with value 80, giving  the array 81 spaces 
 char screen[screenSize];
 
 void draw(const int, const char);//add parameters, types
@@ -12,24 +12,17 @@ void clearScreen();
 
 
 int main() {
-   /* const char particleSymbol = 'x';
-    double particlePosition = 0;
-    double particleSpeed = 6.3;
-    const char particleSymbol2 = 'O';
-    double particlePosition2 = 0;
-    double particleSpeed2 = 5.8;
-   */
     const int npart = 3;
-    double Speed[npart]={5, 6.3, 2};
-    double Position[npart]={0, 1, 5};
-    char Symbol[npart]={'x', 'O' ,'v'};
+    double Speed[npart] = {5, 6.3, 2};
+    double Position[npart] = {0, 1, 5};
+    char Symbol[npart] = {'x', 'O' ,'v'};
     int timeStep = 0;
     const int stopTime = 60;
  
 
     while (timeStep < stopTime) { 
         clearScreen();// put blank spaces before each entry
-        for (int i=0; i<npart; i++) {
+        for (int i=0; i < npart; i++) {
         draw(Position[i], Symbol[i]);//add arguments
         move(Position[i], Speed[i]);
         }
