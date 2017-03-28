@@ -19,7 +19,7 @@ int main() {
     int timeStep = 0;
     const int stopTime = 60;
     const int screenSize =  maxColumn - minColumn + 1; 
-    char screen[screenSize];
+    char* screen = new char[screenSize]; // dynamically allocate the memory
 
 
  
@@ -33,13 +33,14 @@ int main() {
         printScreen(screenSize, screen);
         timeStep++;
   }
+    delete [] screen; // delete memory used
 }
 
 void draw(int const particlePosition, char const particleSymbol, char screen[]){ //in draw we dont change pos
      screen[static_cast<int>(particlePosition)] = particleSymbol; //position is double so we need to cast it to int
 }
 
-void printScreen(const int screenSize, char screen[]){ 
+void printScreen(const int screenSize, char* screen){ //equivalent to below 
     for (int i =0; i < screenSize; i++)
         std::cout << screen[i]; //dont clear the buffer here yet
     std::cout << std::endl; //clear buffer
