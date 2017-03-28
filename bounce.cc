@@ -10,7 +10,7 @@ struct Particle {
     double Position;
 };
 
-void draw(Particle, char[]);
+void draw(const Particle&, char[]);
 void move(Particle&);
 void printScreen(const int, char[]);
 void clearScreen(const int, char[]);
@@ -49,7 +49,7 @@ int main() {
     delete [] screen; // delete memory used
 }
 
-void draw(Particle ps, char screen[]){ 
+void draw(const Particle& ps, char screen[]){ //ref & here saves memory, but cant draw const particles now, const Particle does not allow to change it
      screen[static_cast<int>(ps.Position)] = ps.Symbol; 
 }
 
