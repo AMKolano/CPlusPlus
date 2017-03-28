@@ -2,7 +2,7 @@
 
 const int maxColumn = 80;
 const int minColumn = 0;
-const int screenSize =  maxColumn - minColumni + 1;  //c++ runs const int array size,we want particle to run between 0 and 80, compiler does not recognize the error if only 80 is left, we start to access memory outside boundries, (where we update screen size with value 80, giving  the array 81 spaces 
+const int screenSize =  maxColumn - minColumn + 1;  //c++ runs const int array size,we want particle to run between 0 and 80, compiler does not recognize the error if only 80 is left, we start to access memory outside boundries, (where we update screen size with value 80, giving  the array 81 spaces 
 char screen[screenSize];
 
 void draw(const int, const char);//add parameters, types
