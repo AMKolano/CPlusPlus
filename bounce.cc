@@ -3,26 +3,31 @@
 const int maxColumn = 80;
 const int minColumn = 0;
 
-
-
-void draw(const int, const char, char[]);
-void move(double&, double&);
-void printScreen(const int, char[]);
-void clearScreen(const int, char[]);
-
-//one array of particle struct
-
+//using sdt::cout; using std::endl;
 struct Particle {
     char Symbol;
     double Speed;
     double Position;
 };
 
+void draw(Particle, char[]);
+void move(Particle&);
+void printScreen(const int, char[]);
+void clearScreen(const int, char[]);
+
+
+/*
+struct Particle {
+    char Symbol;
+    double Speed;
+    double Position;
+};  
+*/
 
 int main() {
     const int npart = 3;
     
-    Particle ps[npart] = {{'x', 5.6, 0 },{'O', 6.3, 2},{'V',4, 1 } };// make array ps of particles with symbol, speed and position, order kept as in struct
+    Particle ps[npart] = {{'x', 5.6, 0 },{'O', 6.3, 2},{'V',4, 1 } };
 
     int timeStep = 0;
     const int stopTime = 60;
@@ -35,8 +40,8 @@ int main() {
     while (timeStep < stopTime) { 
         clearScreen(screenSize, screen);// put blank spaces before each entry
         for (int i=0; i < npart; i++) {
-        draw(ps[i].Position, ps[i].Symbol, screen);//add arguments
-        move(ps[i].Position, ps[i].Speed); //ps.Position[i], could not work coz ps is a pointer but struct is not, but if i access one of the particles ps, i can access stuff in there, hence ps[i].Position works, i acess particle nr i, then .Position acess its position
+        draw(ps[i], screen);//add arguments
+        move(ps[i]); 
         }
         printScreen(screenSize, screen);
         timeStep++;
@@ -44,8 +49,8 @@ int main() {
     delete [] screen; // delete memory used
 }
 
-void draw(int const particlePosition, char const particleSymbol, char screen[]){ //in draw we dont change pos
-     screen[static_cast<int>(particlePosition)] = particleSymbol; //position is double so we need to cast it to int
+void draw(Particle ps, char screen[]){ 
+     screen[static_cast<int>(ps.Position)] = ps.Symbol; 
 }
 
 void printScreen(const int screenSize, char* screen){ //equivalent to below 
@@ -60,15 +65,15 @@ void clearScreen(const int screenSize, char screen[]){
    
 }
 
-void move(double& particlePosition, double& particleSpeed){
- particlePosition += particleSpeed;
+void move(Particle& ps){
+ ps.Position += ps.Speed;
 
-   if (particlePosition >= maxColumn) {
-      particlePosition = maxColumn;
-      particleSpeed = -particleSpeed;
-    } else if (particlePosition < minColumn) {
-      particlePosition = minColumn;
-      particleSpeed = -particleSpeed;
+   if (ps.Position >= maxColumn) {
+      ps.Position = maxColumn;
+      ps.Speed = -ps.Speed;
+    } else if (ps.Position < minColumn) {
+      ps.Position = minColumn;
+      ps.Speed = -ps.Speed;
     }
 
 }
