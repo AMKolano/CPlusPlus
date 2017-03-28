@@ -9,7 +9,7 @@ struct Particle {
     double Speed;
     double Position;
 };
-
+void initialize(Particle* , char , double, double);
 void draw(const Particle*, char[]);
 void move(Particle*);
 void printScreen(const int, char[]);
@@ -27,7 +27,10 @@ struct Particle {
 int main() {
     const int npart = 3;
     
-    Particle ps[npart] = {{'x', 5.6, 0 },{'O', 6.3, 2},{'V',4, 1 } };
+    Particle ps[npart];
+    initialize(&ps[0],'V',4, 1 );
+    initialize(&ps[1],'X',3, 1 );
+    initialize(&ps[2],'O',4.6, 2 );
 
     int timeStep = 0;
     const int stopTime = 60;
@@ -40,6 +43,7 @@ int main() {
     while (timeStep < stopTime) { 
         clearScreen(screenSize, screen);// put blank spaces before each entry
         for (int i=0; i < npart; i++) {
+
         draw(&ps[i], screen);//add arguments
         move(&ps[i]); 
         }
@@ -48,6 +52,17 @@ int main() {
   }
     delete [] screen; // delete memory used
 }
+
+void initialize(Particle* ps, char Symbol, double Speed, double Position ){
+    ps->Symbol = Symbol;
+    ps->Speed = Speed;
+    ps->Position = Position;
+  
+ 
+
+
+}
+
 
 void draw(const Particle* ps, char screen[]){ //ref & here saves memory, but cant draw const particles now, const Particle does not allow to change it
      screen[static_cast<int>(ps->Position)] = ps->Symbol; 
