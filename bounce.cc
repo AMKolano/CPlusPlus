@@ -35,25 +35,27 @@ struct Particle {
 
 
 struct Screen{
-    int screenSize;
+    size_t screenSize;
     char* screen; 
 
 
     void printScreen(){ //equivalent to below 
-        for (int i =0; i < screenSize; i++)
-            std::cout << screen[i]; //dont clear the buffer here yet
+        for (size_t i =0; i < screenSize; i++)
+            std::cout << this->screen[i]; //dont clear the buffer here yet
             std::cout << std::endl; //clear buffer
     }
 
     void clearScreen(){
-        for (int i = minColumn; i < screenSize; i++)
+        for (size_t i = minColumn; i < screenSize; i++)
             screen[i] = ' '; //dont clear the buffer here yet 
     }
 
 
-    void initializeScreen(int screenSize){
-        this-> screenSize = screenSize;
+    void initializeScreen(const size_t screenSize){ //to keep it positive
         this->screen = new char [screenSize];
+        this->screenSize = screenSize;
+
+
     }
 
 };
@@ -71,22 +73,20 @@ int main() {
     const int stopTime = 60;
     
    //Initialize screen
-     Screen screen;
+     Screen screen;//if anything is written here code, it will not work as screen is not initialized yet
      screen.initializeScreen(maxColumn - minColumn + 1);    
     
-  //  char* screen = new char[screenSize]; // dynamically allocate the memory
-
     while (timeStep < stopTime) { 
         screen.clearScreen();// put blank spaces before each entry
         for (int i=0; i < npart; i++) {
         //equivalent to the one below &ps[i]->draw(screen):   
-        ps[i].draw();//magic happens and no longer need arguments here?
+        ps[i].draw(screen.screen);//magic happens and no longer need arguments here?
         ps[i].move(); 
         }
         screen.printScreen();
         timeStep++;
   }
-   // delete [] screen; // delete memory used
+   delete [] screen.screen; // delete memory used, delete only on buffer, second screen is in fact buffer
 }
 
 
