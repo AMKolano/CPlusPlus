@@ -2,7 +2,7 @@
 
 const int maxColumn = 80;
 const int minColumn = 0;
-
+const int Size = (maxColumn - minColumn + 1);
 //using sdt::cout; using std::endl;
 
 //make a struct, normally in a header file
@@ -94,7 +94,7 @@ int main() {
     const int stopTime = 60;
     
    //Initialize screen
-     Screen screen(maxColumn - minColumn + 1);//initialize screen, and pass these arguments to the constructor
+     Screen screen(Size);//IMPORTANT. CONSTRUCTOR. initialize screen, and pass these arguments to the constructor
      
     while (timeStep < stopTime) { 
         screen.clearScreen();// put blank spaces before each entry
