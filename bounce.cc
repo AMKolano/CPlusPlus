@@ -19,11 +19,7 @@ public:
         for (size_t i = minColumn; i < screenSize; i++)
             buffer[i] = ' '; //dont clear the buffer here yet 
     }
-    
-    //a[b] = 'd' //
-    //operators, return by refernece char&
-    //really there char& operator[](Screen *const this, const unsigned position){
-   
+       
     Screen(const Screen& origin) : screenSize(origin.screenSize), buffer(new char[this->screenSize]) {
            std::copy(origin.buffer, origin.buffer+screenSize, this->buffer);
            }
@@ -33,14 +29,18 @@ public:
    ~Screen(){
         delete [] this->buffer;
      }
+   //a[b] = 'd' //
+   //    //operators, return by refernece char&
+   //        //really there char& operator[](Screen *const this, const unsigned position){
+   
 
    char& operator[](const unsigned Position){
         return this->buffer[Position];
    }
-    //void put(const char Symbol, unsigned Position){
-    //    buffer[Position] = Symbol;
-   // }
 
+
+
+  
 private: // good practice put privite at the bottom
     size_t const screenSize; //fixed screen for now
     char * const buffer;
@@ -67,7 +67,16 @@ public:
     }
 
     Particle(char Symbol, double Speed, double Position) : Symbol(Symbol), Speed(Speed), Position(Position){}
-    Particle() : Symbol('Z'), Speed(5), Position(2){}   //we overload our constructor overwritten by default one, in c++98 thats the only way
+    Particle() : Symbol('Z'), Speed(5), Position(2){}
+
+
+    Particle& operator = (const Particle& rhs){
+       this->Symbol = rhs.Symbol;
+       this->Position = rhs.Position;
+       this->Speed = rhs.Speed;
+       return *this; //its particle, without pointer its a pointer   
+       } 
+ 
 
 private:    
     char Symbol;
@@ -80,8 +89,7 @@ int main() {
     const int npart = 3;
     
     Particle ps[npart];
-
-    ps[0] = Particle('V',4, 1 );
+    ps[0] = Particle('V',4, 1 );  // type of ps[0] is Particle; signature operator = this parm
     ps[1] = Particle('X',3, 1 );
     ps[2] = Particle('O',4.6, 2 );
 
@@ -89,9 +97,7 @@ int main() {
     const int stopTime = 60;
     
    //Initialize screen
-    Screen screen(Size);//IMPORTANT. CONSTRUCTOR==CTOR. initialize screen, and pass these arguments to the constructor., Function"screen" that lives in the class "Screen".
-   //  Screen screen = Size;
- 
+    Screen screen(Size);
     while (timeStep < stopTime) { 
         screen.clearScreen();// put blank spaces before each entry
         for (int i=0; i < npart; i++) {
@@ -101,43 +107,6 @@ int main() {
         screen.printScreen();
         timeStep++;
   }
-//  screen.destroy(); 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
