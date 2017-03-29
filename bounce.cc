@@ -19,7 +19,11 @@ public:
         for (size_t i = minColumn; i < screenSize; i++)
             buffer[i] = ' '; //dont clear the buffer here yet 
     }
-
+    
+    //a[b] = 'd' //
+    //operators, return by refernece char&
+    //really there char& operator[](Screen *const this, const unsigned position){
+   
     Screen(const Screen& origin) : screenSize(origin.screenSize), buffer(new char[this->screenSize]) {
            std::copy(origin.buffer, origin.buffer+screenSize, this->buffer);
            }
@@ -30,10 +34,12 @@ public:
         delete [] this->buffer;
      }
 
-
-    void put(const char Symbol, unsigned Position){
-        buffer[Position] = Symbol;
-    }
+   char& operator[](const unsigned Position){
+        return this->buffer[Position];
+   }
+    //void put(const char Symbol, unsigned Position){
+    //    buffer[Position] = Symbol;
+   // }
 
 private: // good practice put privite at the bottom
     size_t const screenSize; //fixed screen for now
@@ -45,7 +51,7 @@ private: // good practice put privite at the bottom
 class  Particle {
 public:   
     void draw(Screen& screen) const{ 
-        screen.put(Symbol, Position);
+        screen[Position]=Symbol;
     }
 
     void move(){
