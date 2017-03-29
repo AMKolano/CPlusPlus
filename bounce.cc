@@ -36,23 +36,23 @@ struct Particle {
 
 struct Screen{
     size_t screenSize;
-    char* screen; 
+    char* buffer; 
 
 
     void printScreen(){ //equivalent to below 
         for (size_t i =0; i < screenSize; i++)
-            std::cout << this->screen[i]; //dont clear the buffer here yet
+            std::cout << this->buffer[i]; //dont clear the buffer here yet
             std::cout << std::endl; //clear buffer
     }
 
     void clearScreen(){
         for (size_t i = minColumn; i < screenSize; i++)
-            screen[i] = ' '; //dont clear the buffer here yet 
+            buffer[i] = ' '; //dont clear the buffer here yet 
     }
 
 
     void initializeScreen(const size_t screenSize){ //to keep it positive
-        this->screen = new char [screenSize];
+        this->buffer = new char [screenSize];
         this->screenSize = screenSize;
 
 
@@ -80,13 +80,13 @@ int main() {
         screen.clearScreen();// put blank spaces before each entry
         for (int i=0; i < npart; i++) {
         //equivalent to the one below &ps[i]->draw(screen):   
-        ps[i].draw(screen.screen);//magic happens and no longer need arguments here?
+        ps[i].draw(screen.buffer);//magic happens and no longer need arguments here?
         ps[i].move(); 
         }
         screen.printScreen();
         timeStep++;
   }
-   delete [] screen.screen; // delete memory used, delete only on buffer, second screen is in fact buffer
+   delete [] screen.buffer; // delete memory used, delete only on buffer, second screen is in fact buffer
 }
 
 
