@@ -6,13 +6,50 @@ const int minColumn = 0;
 //using sdt::cout; using std::endl;
 
 //make a class'ish
+struct Screen{
+private:
+    size_t screenSize;
+    char* buffer;
+public:
+
+    void printScreen(){
+        for (size_t i =0; i < screenSize; i++)
+            std::cout << this->buffer[i]; //dont clear the buffer here yet
+            std::cout << std::endl; //clear buffer
+    }
+
+    void clearScreen(){
+        for (size_t i = minColumn; i < screenSize; i++)
+            buffer[i] = ' '; //dont clear the buffer here yet 
+    }
+
+
+    void initializeScreen(const size_t screenSize){ //to keep it positive
+        this->buffer = new char [screenSize];
+        this->screenSize = screenSize;
+    }
+
+    void put(const char Symbol, unsigned Position){//infact compiler changes double position into int anyway-> we want it positive so we can write unsigned int
+
+    buffer[Position] = Symbol;
+
+    }
+
+    void destroy(){
+        delete [] this->buffer;
+    }
+
+};
+
+
 struct Particle {
     char Symbol;
     double Speed;
     double Position;
 
-    void draw(char screen[]) const{ // Const member function. it is not allowed to modifiy it . Pointer is const automatically.
-       screen[static_cast<int>(Position)] = Symbol;
+    void draw(Screen screen) const{ 
+        screen.put(Symbol, Position);
+       //screen.buffer[static_cast<int>(Position)] = Symbol;
     }
 
     void move(){
@@ -33,34 +70,6 @@ struct Particle {
     }
 };
 
-
-struct Screen{
-    size_t screenSize;
-    char* buffer; 
-
-
-    void printScreen(){ //equivalent to below 
-        for (size_t i =0; i < screenSize; i++)
-            std::cout << this->buffer[i]; //dont clear the buffer here yet
-            std::cout << std::endl; //clear buffer
-    }
-
-    void clearScreen(){
-        for (size_t i = minColumn; i < screenSize; i++)
-            buffer[i] = ' '; //dont clear the buffer here yet 
-    }
-
-
-    void initializeScreen(const size_t screenSize){ //to keep it positive
-        this->buffer = new char [screenSize];
-        this->screenSize = screenSize;
-
-
-    }
-
-};
-
-
 int main() {
     const int npart = 3;
     
@@ -73,20 +82,21 @@ int main() {
     const int stopTime = 60;
     
    //Initialize screen
-     Screen screen;//if anything is written here code, it will not work as screen is not initialized yet
+     Screen screen;
      screen.initializeScreen(maxColumn - minColumn + 1);    
     
     while (timeStep < stopTime) { 
         screen.clearScreen();// put blank spaces before each entry
         for (int i=0; i < npart; i++) {
-        //equivalent to the one below &ps[i]->draw(screen):   
-        ps[i].draw(screen.buffer);//magic happens and no longer need arguments here?
+        
+        ps[i].draw(screen);//magic happens and no longer need arguments here?
         ps[i].move(); 
         }
         screen.printScreen();
         timeStep++;
   }
-   delete [] screen.buffer; // delete memory used, delete only on buffer, second screen is in fact buffer
+  screen.destroy(); 
+
 }
 
 
