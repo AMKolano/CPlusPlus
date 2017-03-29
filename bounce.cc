@@ -21,10 +21,20 @@ public:
     }
 
 
-    void initializeScreen(const size_t screenSize){ //to keep it positive
+   // void initializeScreen(const size_t screenSize){ //to keep it positive
+   //     this->buffer = new char [screenSize];
+   //     this->screenSize = screenSize;
+   // }
+
+    Screen(const size_t screenSize){
         this->buffer = new char [screenSize];
         this->screenSize = screenSize;
+
     }
+
+
+
+
 
     void put(const char Symbol, unsigned Position){//infact compiler changes double position into int anyway-> we want it positive so we can write unsigned int
 
@@ -84,9 +94,8 @@ int main() {
     const int stopTime = 60;
     
    //Initialize screen
-     Screen screen;
-     screen.initializeScreen(maxColumn - minColumn + 1);    
-    
+     Screen screen(maxColumn - minColumn + 1);//initialize screen, and pass these arguments to the constructor
+     
     while (timeStep < stopTime) { 
         screen.clearScreen();// put blank spaces before each entry
         for (int i=0; i < npart; i++) {
