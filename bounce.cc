@@ -32,18 +32,15 @@ public:
 
     }
 
-
-
+    ~Screen(){
+        delete [] this->buffer;
+     }
 
 
     void put(const char Symbol, unsigned Position){//infact compiler changes double position into int anyway-> we want it positive so we can write unsigned int
 
     buffer[Position] = Symbol;
 
-    }
-
-    void destroy(){
-        delete [] this->buffer;
     }
 
 private: // good practice put privite at the bottom
@@ -94,8 +91,8 @@ int main() {
     const int stopTime = 60;
     
    //Initialize screen
-   //    Screen screen(Size);//IMPORTANT. CONSTRUCTOR==CTOR. initialize screen, and pass these arguments to the constructor., Function"screen" that lives in the class "Screen".
-     Screen screen = Size;
+    Screen screen(Size);//IMPORTANT. CONSTRUCTOR==CTOR. initialize screen, and pass these arguments to the constructor., Function"screen" that lives in the class "Screen".
+   //  Screen screen = Size;
  
     while (timeStep < stopTime) { 
         screen.clearScreen();// put blank spaces before each entry
@@ -107,7 +104,7 @@ int main() {
         screen.printScreen();
         timeStep++;
   }
-  screen.destroy(); 
+//  screen.destroy(); 
 
 }
 
