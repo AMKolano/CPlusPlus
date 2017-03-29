@@ -5,11 +5,8 @@ const int minColumn = 0;
 
 //using sdt::cout; using std::endl;
 
-//make a class'ish
+//make a struct, normally in a header file
 struct Screen{
-private:
-    size_t screenSize;
-    char* buffer;
 public:
 
     void printScreen(){
@@ -38,6 +35,10 @@ public:
     void destroy(){
         delete [] this->buffer;
     }
+
+private: // good practice put privite at the bottom
+    size_t screenSize;
+    char* buffer;
 
 };
 
