@@ -24,7 +24,7 @@ public:
            std::copy(origin.buffer, origin.buffer+screenSize, this->buffer);
            }
     
-    Screen(const size_t screenSize) : buffer(new char[screenSize]), screenSize(screenSize){} 
+    Screen(const size_t screenSize) : screenSize(screenSize), buffer(new char[screenSize]) {} 
 
    ~Screen(){
         delete [] this->buffer;
