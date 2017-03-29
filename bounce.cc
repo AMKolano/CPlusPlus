@@ -94,8 +94,9 @@ int main() {
     const int stopTime = 60;
     
    //Initialize screen
-     Screen screen(Size);//IMPORTANT. CONSTRUCTOR. initialize screen, and pass these arguments to the constructor
-     
+   //    Screen screen(Size);//IMPORTANT. CONSTRUCTOR==CTOR. initialize screen, and pass these arguments to the constructor., Function"screen" that lives in the class "Screen".
+     Screen screen = Size;
+ 
     while (timeStep < stopTime) { 
         screen.clearScreen();// put blank spaces before each entry
         for (int i=0; i < npart; i++) {
