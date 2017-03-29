@@ -6,7 +6,7 @@ const int minColumn = 0;
 //using sdt::cout; using std::endl;
 
 //make a struct, normally in a header file
-struct Screen{
+class  Screen{
 public:
 
     void printScreen(){
@@ -43,7 +43,8 @@ private: // good practice put privite at the bottom
 };
 
 
-struct Particle {
+class  Particle {
+public:       // has to be public, as by default class is privite
     char Symbol;
     double Speed;
     double Position;
