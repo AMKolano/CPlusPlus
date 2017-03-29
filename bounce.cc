@@ -20,16 +20,20 @@ public:
             buffer[i] = ' '; //dont clear the buffer here yet 
     }
 
-
-   // void initializeScreen(const size_t screenSize){ //to keep it positive
-   //     this->buffer = new char [screenSize];
-   //     this->screenSize = screenSize;
-   // }
-
+    Screen(const Screen& origin){
+           this->screenSize = origin.screenSize; //copy size from origin to this
+           this->buffer = new char[this->screenSize]; //create new memory for the screen size that is an array,
+           //fill it up in a loop, copy screen from orinal to 
+           //for (unsigned i =0; i < this->screenSize; i++)
+           //    this->buffer[i] = origin.buffer[i]; 
+              std::copy(origin.buffer, origin.buffer+screenSize, this->buffer);
+           
+    
+    } //copy constructor, copy original &, const->we dont change it
+    
     Screen(const size_t screenSize){
         this->buffer = new char [screenSize];
         this->screenSize = screenSize;
-
     }
 
     ~Screen(){
@@ -37,10 +41,8 @@ public:
      }
 
 
-    void put(const char Symbol, unsigned Position){//infact compiler changes double position into int anyway-> we want it positive so we can write unsigned int
-
-    buffer[Position] = Symbol;
-
+    void put(const char Symbol, unsigned Position){
+        buffer[Position] = Symbol;
     }
 
 private: // good practice put privite at the bottom
@@ -56,13 +58,12 @@ public:       // has to be public, as by default class is privite
     double Speed;
     double Position;
 
-    void draw(Screen screen) const{ 
+    void draw(Screen& screen) const{ 
         screen.put(Symbol, Position);
-       //screen.buffer[static_cast<int>(Position)] = Symbol;
     }
 
     void move(){
-        Position += Speed; //this-> no longer needed, compiler does it for u 
+        Position += Speed;
 
         if (Position >= maxColumn) {
         Position = maxColumn;
@@ -98,7 +99,7 @@ int main() {
         screen.clearScreen();// put blank spaces before each entry
         for (int i=0; i < npart; i++) {
         
-        ps[i].draw(screen);//magic happens and no longer need arguments here?
+        ps[i].draw(screen);
         ps[i].move(); 
         }
         screen.printScreen();
