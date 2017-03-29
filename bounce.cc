@@ -43,11 +43,7 @@ private: // good practice put privite at the bottom
 
 
 class  Particle {
-public:       // has to be public, as by default class is privite
-    char Symbol;
-    double Speed;
-    double Position;
-
+public:   
     void draw(Screen& screen) const{ 
         screen.put(Symbol, Position);
     }
@@ -63,20 +59,25 @@ public:       // has to be public, as by default class is privite
         Speed = -Speed;
         }
     }
-    void initialize(char Symbol, double Speed, double Position ){
-        this->Symbol = Symbol;//the smae names so here this-> is needed, or i change the name
-        this->Speed = Speed;
-        this->Position = Position;
-    }
+
+    Particle(char Symbol, double Speed, double Position) : Symbol(Symbol), Speed(Speed), Position(Position){}
+    Particle() : Symbol('Z'), Speed(5), Position(2){}   //we overload our constructor overwritten by default one, in c++98 thats the only way
+
+private:    
+    char Symbol;
+    double Speed;
+    double Position;
+
 };
 
 int main() {
     const int npart = 3;
     
     Particle ps[npart];
-    ps[0].initialize('V',4, 1 );
-    ps[1].initialize('X',3, 1 );
-    ps[2].initialize('O',4.6, 2 );
+
+    ps[0] = Particle('V',4, 1 );
+    ps[1] = Particle('X',3, 1 );
+    ps[2] = Particle('O',4.6, 2 );
 
     int timeStep = 0;
     const int stopTime = 60;
@@ -88,10 +89,9 @@ int main() {
     while (timeStep < stopTime) { 
         screen.clearScreen();// put blank spaces before each entry
         for (int i=0; i < npart; i++) {
-        
-        ps[i].draw(screen);
-        ps[i].move(); 
-        }
+           ps[i].draw(screen);
+           ps[i].move(); 
+           }
         screen.printScreen();
         timeStep++;
   }
