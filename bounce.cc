@@ -24,17 +24,17 @@ public:
            this->screenSize = origin.screenSize; //copy size from origin to this
            this->buffer = new char[this->screenSize]; //create new memory for the screen size that is an array,
            //fill it up in a loop, copy screen from orinal to 
-           //for (unsigned i =0; i < this->screenSize; i++)
+           //for (unsigned i =0; i < this->screenSize; ++i)
            //    this->buffer[i] = origin.buffer[i]; 
-              std::copy(origin.buffer, origin.buffer+screenSize, this->buffer);
+           std::copy(origin.buffer, origin.buffer+screenSize, this->buffer);
            
     
     } //copy constructor, copy original &, const->we dont change it
     
-    Screen(const size_t screenSize){
-        this->buffer = new char [screenSize];
-        this->screenSize = screenSize;
-    }
+    Screen(const size_t screenSize) : buffer(new char[screenSize]), screenSizeS(screenSize){} //only in constructors, we can initialize the members  we cannt do it in the constructor body, its too late,any name of data member of that class, nd inside the parameters 
+   //        this->buffer = new char [screenSize];
+   //        this->screenSize = screenSize;
+    
 
     ~Screen(){
         delete [] this->buffer;
@@ -47,7 +47,7 @@ public:
 
 private: // good practice put privite at the bottom
     size_t screenSize;
-    char* buffer;
+    char * const buffer;
 
 };
 
