@@ -71,11 +71,26 @@ char& Screen::operator[](const unsigned Position){
 ///////////////Particle/////////////////
 class  Particle {
 public:   
-    void draw(Screen& screen) const{ 
+    void draw(Screen& screen) const;
+    void move();
+    Particle(char Symbol, double Speed, double Position);
+    Particle();
+    Particle& operator = (const Particle& rhs);
+ 
+
+private:    
+    char Symbol;
+    double Speed;
+    double Position;
+
+};
+
+//////////////Outside of the screen////////////////
+ void Particle::draw(Screen& screen) const{
         screen[Position]=Symbol;
     }
 
-    void move(){
+    void Particle::move(){
         Position += Speed;
 
         if (Position >= maxColumn) {
@@ -87,25 +102,23 @@ public:
         }
     }
 
-    Particle(char Symbol, double Speed, double Position) : Symbol(Symbol), Speed(Speed), Position(Position){}
-    Particle() : Symbol('Z'), Speed(5), Position(2){}
+    Particle::Particle(char Symbol, double Speed, double Position) : Symbol(Symbol), Speed(Speed), Position(Position){}
+    Particle::Particle() : Symbol('Z'), Speed(5), Position(2){}
 
 
-    Particle& operator = (const Particle& rhs){
+    Particle& Particle::operator = (const Particle& rhs){
        this->Symbol = rhs.Symbol;
        this->Position = rhs.Position;
        this->Speed = rhs.Speed;
        return *this; //its particle, without pointer its a pointer   
-       } 
- 
+       }
 
-private:    
-    char Symbol;
-    double Speed;
-    double Position;
 
-};
 
+
+
+
+//////////////////////////////////////////////////////
 int main() {
     const int npart = 3;
     
