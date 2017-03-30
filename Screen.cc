@@ -1,4 +1,7 @@
 //screen functions
+#include <cstdlib>
+#include <iostream>
+
 void Screen::printScreen(){
         for (size_t i =0; i < screenSize; i++)
             std::cout << this->buffer[i]; //dont clear the buffer here yet

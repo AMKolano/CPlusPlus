@@ -1,8 +1,9 @@
 //Particle class
-#ifdef Particle_hh
+#ifndef Particle_hh
 #define Particle_hh
 
-#include "Screen.hh"
+#include "Screen.hh"// no need to inlcude whole hader here, enough to say
+class Screen;
 
 class  Particle {
 public:

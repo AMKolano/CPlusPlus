@@ -1,5 +1,5 @@
 //Screen class
-#ifdef Screen_hh
+#ifndef Screen_hh
 #define Screen_hh
 
 

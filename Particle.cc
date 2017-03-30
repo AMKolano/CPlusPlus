@@ -1,4 +1,9 @@
 //Implementation of Particle class
+#include <cstdlib>
+#include "Particle.hh"
+#include "Screen.hh" 
+
+
 void Particle::draw(Screen& screen) const{
     screen[Position]=Symbol;
 }
