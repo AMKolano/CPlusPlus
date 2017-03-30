@@ -1,12 +1,11 @@
 #include <cstdlib>
 #include <iostream>
 #include "Particle.hh" // not standard library so "" and not < >
-//#include "Particle.cc"
-#include "Screen.hh" // not standard library so "" and not < >
-//#include "Screen.cc"
+#include "Screen.hh"
 
-//const int maxColumn = 80;
-//const int minColumn = 0;
+
+
+
 const int Size = (maxColumn - minColumn + 1);
 //using sdt::cout; using std::endl;
 
@@ -14,7 +13,7 @@ int main() {
     const int npart = 3;
     
     Particle ps[npart];
-    ps[0] = Particle('V',4, 1 );  // type of ps[0] is Particle; signature operator = this parm
+    ps[0] = Particle('V',4, 1 );  
     ps[1] = Particle('X',3, 1 );
     ps[2] = Particle('O',4.6, 2 );
 
@@ -24,7 +23,7 @@ int main() {
    //Initialize screen
     Screen screen(Size);
     while (timeStep < stopTime) { 
-        screen.clearScreen();// put blank spaces before each entry
+        screen.clearScreen();
         for (int i=0; i < npart; i++) {
            ps[i].draw(screen);
            ps[i].move(); 
