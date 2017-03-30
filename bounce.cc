@@ -25,56 +25,42 @@ public:
            }
     
     Screen(const size_t screenSize) : screenSize(screenSize), buffer(new char[screenSize]) {} 
-    
+  
+     Screen& operator = (const Screen& rhs) {
+    if (this != &rhs) {
+      this->screenSize = rhs.screenSize;
+      delete [] this->buffer;
+      this->buffer = new char[rhs.screenSize];
+      std::copy(rhs.buffer, rhs.buffer+rhs.screenSize, this->buffer);
+      }
+    return *this;
 
+   }
+  
+/*
    //swap function
-   
    Screen& operator = (Screen rhs){
      this->swap(rhs);
      return *this;
     }
-
-
 
    void swap(Screen& other){
     std::swap(this->screenSize, other.screenSize);//standard library swap
     std::swap(this->buffer, other.buffer);
     }
 
-
-    /*
-    //asignement operator, cannot be const, Screen& so we dont copy unnesessairly
-    Screen& operator = (Screen& rhs){
-      if (this != &rhs){                   //self asignement check, are we talking bout the same object, this and rhs
-      this->screenSize = rhs.screenSize; //copy size to new
-                                         //before we asign new memory for buffer, we need to remove, that one that existed
-      delete [] this-> buffer;                                   //  we deleted old buffer, but the poitner is still pointing
-      this->buffer = new char[rhs.screenSize];//new buffer memory, and poin to it, with this buffer
-      std::copy(rhs.buffer, rhs.buffer+rhs.screenSize, this->buffer); //copy everything from original buffer to the new one, one by one
-      }  
-      return *this; //this , pointer, we dereference it here, coz we return value
-    //self asignement
-    
-
-    }
-*/
-
- 
+ */
    ~Screen(){
         delete [] this->buffer;
      }
-   //a[b] = 'd' //
-   //    //operators, return by refernece char&
-   //        //really there char& operator[](Screen *const this, const unsigned position){
+ 
    
 
    char& operator[](const unsigned Position){
         return this->buffer[Position];
    }
 
-
-
-  
+ 
 private: // good practice put privite at the bottom
     size_t screenSize; //fixed screen for now
     char * buffer;
