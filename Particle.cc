@@ -33,5 +33,28 @@ Particle& Particle::operator = (const Particle& rhs){
     this->Speed = rhs.Speed;
     return *this; //its particle, without pointer its a pointer   
 }
+////ooooh its Magic
 
+void MagicParticle::move(){
+    Position += Speed;
 
+    if (Position >= maxColumn) {
+    Position = minColumn;
+
+    } else if (Position < minColumn) {
+    Position = maxColumn;
+
+    } 
+}
+
+//MagicParticle::MagicParticle(char Symbol, double Speed, double Position) : Symbol(Symbol), Speed(Speed), Position(Position){}
+//MagicParticle::MagicParticle() : Symbol('Z'), Speed(5), Position(2){}
+
+/*
+MagicParticle& MagicParticle::operator = (const MagicParticle& rhs){
+    this->Symbol = rhs.Symbol;
+    this->Position = rhs.Position;
+    this->Speed = rhs.Speed;
+    return *this; //its particle, without pointer its a pointer   
+}   
+*/
