@@ -297,6 +297,16 @@ Dynamic allocation of data members (buffer changes) requires writing our own rul
 
 friend: in class, extension of the class, part of interface to be implemented as a non member function
 
+veictors dont need cleaning, its done automatically, no need for default constructi NB
+
+inheritance:
+class sub: public Base{} // default is privite
+
+dispatch - static dispatch( decision made in compile time)  and dynamic dispatch(runtime)
+dynamic dispatch at the "dot", p.move()
+c++ dynamic disoatch is switched off by default, unless we tell it too
+dinamic dispatch works only through references, and pointers, not values!!!!
+mic dispatching conteiners MUST be containers of pointers, (references will not work as in the end are the values)
 
 
 

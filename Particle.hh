@@ -15,6 +15,7 @@ public:
     virtual void move(); //for dynamic dispatch
     Particle(char Symbol, double Speed, double Position);
     Particle();
+    virtual ~Particle(){};
     Particle& operator = (const Particle& rhs);
 
 
