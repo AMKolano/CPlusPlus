@@ -163,7 +163,6 @@ double* pd = 0; pointer to a double
 pd + 1; // Not 1, but 8 -> take one job of double which is 8 (size of double?)
 we have array
 3[a]
-so compiler goes to 3rd place of that array
 
 .........................
 dynamic allocation of memorz (arrays) require deleting?freeing it at the end of the process, otherwise u may lose it all)
@@ -175,6 +174,128 @@ delete one;
 delete [] many; // VERY IMPORTANT, missing brackets can be really bad
 ...............................
 
+............................................
+o compiler goes to 3rd place of that array
+
+const pointers
+T       * const v (v is a constant pointer to (changable T)
+T const *       v (v is a (changable) pointer to a constant T)
+
+
+void move(Particle* const)) we need the pointer to bve const and not particle, coz we wanna move it)
+void draw(Particle const * const)we want all constant, we will not change mind drawing
+...............................................
+
+mutable double position; -> then draw function could modify the position, 
+but not the rest if draw() is const
+
+...............................................
+
+..............................................
+29 March 2017
+
+Structs are public untill told they are privite, classes are always privite, but good practise says to write privite anyway
+
+
+2.44.2
+IMPORTANT:Default constructor, constructor without any explicit parameters or arguments.
+it default construct all the data members
+if I dont write a constructor, compiler will do it for me, but it will not do much.
+so we can compile it with c and c++ compilers.
+ It will be createds, when I dont write it. Bad idea.
+I can write default one myself, with zero arg, parm.
+
+Construct: function initializing user defined types.
+......................................
+ is equivalent (ish) to 
+
+
+.........................
+we have a bug, no copy consytuctor, one created by default in the screen function for each of the data members, screensite and buffer, once we wrote destructor, it deleted it, so now it crashes
+
+.................
+Any time u have dynamically allocated something, 
+
+..............
+Compuiler MAY write stuff for me:
+
+IMPORTANT:ALL HAPPENS BEHIND the SCENSES SO U GET ERRORS U CANT FIX) copy cosntructor(all members of class), default constructor( compiler writes it for all member data of the class), deconstructor (one per class wirtten by compiler, calls destructors of all member data in reverse order), 
+
+
+int a + 3; --> int a(3) c syntax
+char * b = blah ---> char* b(blah)
+in initializer list second style is only permitted
+
+
+https://gitlab.cern.ch/jacek/bounce/commits/mastero compiler goes to 3rd place of that array
+
+Encapsulating Particle:
+-no direct access to data members from main body particle.speed etc
+-privite(parameters)  and public(functions)
+-previously, put function in the screen used before so I dont access copy externally
+-constructors, deconstructors, copy constructors ->nearly always
+-by reference and value passing
+-initializer list ( for constructors, to make my life easy)
+-
+
+write for particle we know it for square brackets, 
+asignement operator shoud return ->non const operator
+(a=b)=c;
+
+
+&B gimmie a pointer to that thing B, asking for address
+
+*B  dereference , same with B[o], dereference
+
+
+
+B* =p then p* is B
+B& is another type of B which is B
+B&  r=b -> r is B
+B& is type
+ can always ask for address &, but not pointer always *&B, so the other way around may not always be true
+
+int b(a) instantiate int (type), variable b of type int, that returns value a
+int c(int) function c declaration of type int, that returns int
+int d() declaration of function d, no input returning nothing
+int d; -> defautl constr of d
+ASSIGNEMENT OPERATOR FOR SCREEN-RETURNS
+......................................
+30 March 2017
+........................................
+
+Asignement operator of screen, logic
+Screen a(3)
+screen b(5)
+a[0] = 'a' etc//
+b=a
+
+self asignement
+assignement constructor is very much like copy constructor, we may be able to reuse it then.
+
+
+NB:when i writ a class, i need to worry about making sure, constructor stuff works, so we need to write ours!!!
+default constructor, destructor, copy constr and assignement operator
+
+should be tested well
+......................
+......................
+deafult constr:
+copy constr: 
+Bannana::Bannana(const Bannana&) , has to be ref, so it doesnt get stuck tryin to copy itself
+compiler will: copy constr data members
+destructor:
+Bannana::~Bannanna();
+if i dont do it, it will construct all datat members in reverse order
+
+Assignement op:
+Bannana& Bannana::operator = (const Bannana&);
+compiler will assign all data members
+
+Dynamic allocation of data members (buffer changes) requires writing our own rule of 3, in particle class we just assigned 3 datat members, so compiler one would be good enough, we didnt need to do it.
+
+
+friend: in class, extension of the class, part of interface to be implemented as a non member function
 
 
 
