@@ -14,21 +14,29 @@ int main() {
       
     std::string filename("data.txt");
     std::ifstream in(filename.c_str());// a problem at compilation
-    if (!in)
-    std::cerr << "Could not open file" << filename<<"." <<  std::endl;
+    if (!in){
+        std::cerr << "Could not open file" << filename<<"." <<  std::endl;
     return EXIT_FAILURE;
-
+    }
  
     
     size_t Np;
     in >> Np;
+ 
   
-    const int npart = Np; 
-    Particle* ps = new Particle[npart]; // now dynamically assigned array, before Particle ps = [npart]
-    ps[0] = Particle('V',4, 1 );  
-    ps[1] = Particle('X',3, 1 );
-    ps[2] = Particle('O',4.6, 2 );
+    const size_t  npart = Np; 
+    Particle* ps = new Particle[npart];
+ // now dynamically assigned array, before Particle ps = [npart]
     
+    for (size_t i=0; i < npart; ++i){
+
+       char S;
+       double v, pos;
+       in >> S >> v >> pos;
+       ps[i] = Particle(S,v, pos);
+     std::cout<<i <<std::endl;
+     }
+    in.close();
 
 
     int timeStep = 0;
@@ -38,7 +46,7 @@ int main() {
     Screen screen(Size);
     while (timeStep < stopTime) { 
         screen.clearScreen();
-        for (int i=0; i < npart; i++) {
+        for (size_t i=0; i < npart; i++) {
            ps[i].draw(screen);
            ps[i].move(); 
            }
