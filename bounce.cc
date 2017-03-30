@@ -34,8 +34,8 @@ int main() {
        char S;
        double v, pos;
        in >> S >> v >> pos;
-       ps.push_back(Particle(S,v, pos));
-       std::cout<<i <<std::endl;
+       ps.push_back(MagicParticle(S,v, pos));
+       //std::cout<<i <<std::endl;
      }
     in.close();
 
