@@ -4,6 +4,9 @@
 #include "Screen.hh" 
 
 
+extern const int maxColumn = 80;
+extern const int minColumn = 0;
+
 void Particle::draw(Screen& screen) const{
     screen[Position]=Symbol;
 }

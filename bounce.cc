@@ -5,8 +5,8 @@
 #include "Screen.hh" // not standard library so "" and not < >
 //#include "Screen.cc"
 
-const int maxColumn = 80;
-const int minColumn = 0;
+//const int maxColumn = 80;
+//const int minColumn = 0;
 const int Size = (maxColumn - minColumn + 1);
 //using sdt::cout; using std::endl;
 

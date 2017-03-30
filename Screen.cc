@@ -1,6 +1,10 @@
 //screen functions
 #include <cstdlib>
 #include <iostream>
+#include "Screen.hh"
+
+
+extern const int minColumn;
 
 void Screen::printScreen(){
         for (size_t i =0; i < screenSize; i++)

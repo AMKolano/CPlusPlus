@@ -3,7 +3,11 @@
 #define Particle_hh
 
 #include "Screen.hh"// no need to inlcude whole hader here, enough to say
+
+
 class Screen;
+extern const int maxColumn;
+extern const int minColumn;
 
 class  Particle {
 public:
