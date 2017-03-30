@@ -26,6 +26,23 @@ public:
     
     Screen(const size_t screenSize) : screenSize(screenSize), buffer(new char[screenSize]) {} 
     
+
+   //swap function
+   
+   Screen& operator = (Screen rhs){
+     this->swap(rhs);
+     return *this;
+    }
+
+
+
+   void swap(Screen& other){
+    std::swap(this->screenSize, other.screenSize);//standard library swap
+    std::swap(this->buffer, other.buffer);
+    }
+
+
+    /*
     //asignement operator, cannot be const, Screen& so we dont copy unnesessairly
     Screen& operator = (Screen& rhs){
       if (this != &rhs){                   //self asignement check, are we talking bout the same object, this and rhs
@@ -40,7 +57,7 @@ public:
     
 
     }
-
+*/
 
  
    ~Screen(){
